@@ -9,6 +9,7 @@ import '@fontsource/jetbrains-mono/400.css';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://niranjanpotter.vercel.app'),
   title: 'Niranjan Potter · Senior MuleSoft Developer & Technical Lead',
   description: 'Senior MuleSoft Developer and Technical Lead specializing in API-led connectivity, CloudHub 2.0, and enterprise integration.',
   openGraph: {

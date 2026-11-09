@@ -42,7 +42,7 @@ function useLive() {
 const step = (p: number, a: number) => ({ opacity: seg(p, a, a + 0.08), transform: `translateY(${(1 - seg(p, a, a + 0.08)) * 30}px)` });
 
 const STORY =
-  'I copy a stack once and master it forever. I build scalable full-stack products with React, Node.js and modern backends — clean APIs, sharp system design, and code that ships. Department topper in Data Science, top 100 at Myntra HackerRamp, and 1,250+ problems solved across platforms.';
+  'Senior MuleSoft Developer and Technical Lead orchestrating enterprise integration since 2021. Specializing in API-led connectivity, CloudHub 2.0 modernization, DataWeave 2.0 optimization, and robust multi-cloud architecture across energy, utilities, and global enterprises.';
 
 /** Ring dial for a stat — fills as you scroll. */
 function Dial({ value, suffix, label, k }: { value: number; suffix: string; label: string; k: number }) {
@@ -86,7 +86,7 @@ export default function About() {
             {words.map((w, i) => {
               const lit = seg(inkP * words.length, i - 1, i + 1);
               return (
-                <span key={i} style={{ opacity: 0.16 + lit * 0.84, color: lit > 0.9 && /topper|HackerRamp|1,250\+|forever\./.test(w) ? 'var(--red)' : undefined }}>
+                <span key={i} style={{ opacity: 0.16 + lit * 0.84, color: lit > 0.9 && /CloudHub|DataWeave|API-led|enterprise|modernization|MuleSoft/.test(w) ? 'var(--red)' : undefined }}>
                   {w}{' '}
                 </span>
               );

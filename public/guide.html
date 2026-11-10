@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IntegrationMind | Complete MuleSoft Developer & Architecture Guide 2026 · By Niranjan Potter</title>
+  <meta name="author" content="Niranjan Potter" />
+  <meta name="creator" content="Niranjan Potter" />
+  <meta name="description" content="Complete 2026 MuleSoft Developer & Technical Lead Interview Guide curated & authored by Niranjan Potter. Enterprise architectures, DataWeave 2.0 deep dive, CloudHub 2.0, Agentforce AI, real production scenarios & interview traps." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090e17;
+      --bg-card: #111a2e;
+      --bg-card-hover: #16223b;
+      --bg-alt: #0c1424;
+      --border: #1e2d4a;
+      --border-focus: #00a1e0;
+      --primary: #00a1e0;
+      --primary-glow: rgba(0, 161, 224, 0.25);
+      --accent: #ff8c00;
+      --accent-glow: rgba(255, 140, 0, 0.25);
+      --sf-blue: #0176d3;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --green: #10b981;
+      --red: #ef4444;
+      --purple: #8b5cf6;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f5f9;
+      --bg-alt: #f1f5f9;
+      --border: #e2e8f0;
+      --border-focus: #0176d3;
+      --primary: #0176d3;
+      --primary-glow: rgba(1, 118, 211, 0.15);
+      --accent: #ea580c;
+      --accent-glow: rgba(234, 88, 12, 0.15);
+      --text: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #94a3b8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 15px; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      overflow-x: hidden;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Scroll progress bar */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+      width: 0%;
+      z-index: 9999;
+      transition: width 0.1s ease;
+    }
+
+    /* Header Nav */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(9, 14, 23, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+    }
+    [data-theme="light"] header.site-header {
+      background: rgba(248, 250, 252, 0.9);
+    }
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-badge {
+      background: linear-gradient(135deg, var(--accent), #ff5722);
+      color: white;
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .search-box {
+      position: relative;
+      width: 320px;
+    }
+    .search-box input {
+      width: 100%;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 8px 16px 8px 36px;
+      color: var(--text);
+      font-size: 0.85rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .search-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+    .btn-toggle {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-toggle:hover {
+      border-color: var(--primary);
+      background: var(--bg-card-hover);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      background: radial-gradient(circle at 50% 0%, rgba(0, 161, 224, 0.15) 0%, transparent 60%),
+                  radial-gradient(circle at 80% 20%, rgba(255, 140, 0, 0.08) 0%, transparent 50%),
+                  var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 24px 40px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 161, 224, 0.1);
+      border: 1px solid rgba(0, 161, 224, 0.3);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      max-width: 950px;
+      margin: 0 auto 16px;
+    }
+    .hero h1 span.gradient {
+      background: linear-gradient(135deg, #00c6ff, #0072ff 50%, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p.lead {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 800px;
+      margin: 0 auto 28px;
+    }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      max-width: 1000px;
+      margin: 32px auto 0;
+    }
+    .stat-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .stat-pill:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
+    .stat-num {
+      font-family: var(--font-mono);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+
+    /* Category Filter Navigation */
+    .filter-bar {
+      position: sticky;
+      top: 61px;
+      z-index: 900;
+      background: rgba(9, 14, 23, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    [data-theme="light"] .filter-bar {
+      background: rgba(248, 250, 252, 0.95);
+    }
+    .filter-list {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      gap: 8px;
+    }
+    .pill-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pill-btn:hover {
+      color: var(--text);
+      border-color: var(--primary);
+    }
+    .pill-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1350px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* Section Cards */
+    .section-module {
+      margin-bottom: 48px;
+      scroll-margin-top: 130px;
+    }
+    .module-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 12px;
+    }
+    .module-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .module-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--primary-glow);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+    .module-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .module-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      gap: 20px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+    }
+
+    /* Card Component */
+    .qa-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .qa-card:hover {
+      border-color: rgba(0, 161, 224, 0.4);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+    .qa-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(0, 161, 224, 0.12);
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .qa-badge.star {
+      background: rgba(255, 140, 0, 0.15);
+      color: var(--accent);
+    }
+    .qa-badge.trap {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--red);
+    }
+    .qa-badge.new {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--green);
+    }
+    .qa-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+    .qa-card p {
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+
+    /* Verbal Script Callout Box */
+    .script-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(0, 161, 224, 0.05));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-left: 4px solid var(--green);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+    .script-box-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .script-quote {
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    /* Comparison Box (What to Say vs Never Say) */
+    .split-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 16px 0;
+    }
+    .compare-side {
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      font-size: 0.88rem;
+    }
+    .compare-side.do {
+      background: rgba(16, 185, 129, 0.07);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .compare-side.dont {
+      background: rgba(239, 68, 68, 0.07);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    .compare-header {
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .compare-side.do .compare-header { color: var(--green); }
+    .compare-side.dont .compare-header { color: var(--red); }
+    .compare-side ul { list-style: none; padding-left: 0; }
+    .compare-side li {
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+    .compare-side.do li::before { content: "✓ "; color: var(--green); font-weight: bold; }
+    .compare-side.dont li::before { content: "✗ "; color: var(--red); font-weight: bold; }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+    table.data-table th {
+      background: var(--bg-alt);
+      color: var(--primary);
+      padding: 12px 16px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    table.data-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    table.data-table tr:last-child td { border-bottom: none; }
+    table.data-table tr:hover td { background: var(--bg-card-hover); }
+
+    /* Code Blocks */
+    .code-block {
+      background: #080c14;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin: 14px 0;
+      overflow: hidden;
+      font-family: var(--font-mono);
+    }
+    .code-header {
+      background: #0d1422;
+      border-bottom: 1px solid var(--border);
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+    .code-lang {
+      color: var(--primary);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .btn-copy {
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: var(--text-muted);
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.72rem;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn-copy:hover {
+      background: var(--primary);
+      color: white;
+    }
+    .code-content {
+      padding: 14px 16px;
+      overflow-x: auto;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: #93c5fd;
+    }
+    .code-content pre { margin: 0; font-family: inherit; }
+
+    /* Cross-Question Follow-up Callout */
+    .cross-q {
+      background: rgba(255, 140, 0, 0.06);
+      border-left: 3px solid var(--accent);
+      padding: 12px 16px;
+      margin: 14px 0 0;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .cross-q-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .cross-q-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .cross-q-text strong {
+      color: var(--text);
+    }
+
+    /* Diagram Canvas / Architecture */
+    .arch-diagram {
+      background: #080d1a;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin: 20px 0;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: #38bdf8;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    /* Accordion / Expandable */
+    details.qa-accordion {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    details.qa-accordion[open] {
+      border-color: var(--primary);
+    }
+    summary.qa-summary {
+      padding: 18px 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      user-select: none;
+    }
+    summary.qa-summary:hover {
+      background: var(--bg-card-hover);
+    }
+    .summary-icon {
+      color: var(--primary);
+      transition: transform 0.2s;
+    }
+    details[open] .summary-icon {
+      transform: rotate(90deg);
+    }
+    .qa-body {
+      padding: 20px 24px;
+      border-top: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    /* Footer */
+    footer.site-footer {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      padding: 50px 24px 30px;
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    .footer-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .footer-link:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    /* Floating Back to Top Button */
+    #back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--primary);
+      color: white;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 161, 224, 0.4);
+      z-index: 1000;
+      font-size: 1.2rem;
+      transition: all 0.2s;
+    }
+    #back-to-top:hover {
+      transform: scale(1.1);
+      background: var(--accent);
+    }
+
+    /* Author Branding & Persistent Attribution */
+    .nav-author-chip {
+      background: rgba(0, 161, 224, 0.08);
+      border: 1px solid rgba(0, 161, 224, 0.25);
+      border-radius: 20px;
+      padding: 4px 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    .nav-author-chip:hover {
+      background: rgba(0, 161, 224, 0.14);
+      border-color: var(--primary);
+    }
+    .nav-author-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .nav-author-text {
+      color: var(--text-muted);
+    }
+    .nav-author-name {
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-author-name:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+    .nav-author-role {
+      color: var(--primary);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Hero Author Showcase Card */
+    .hero-author-showcase {
+      margin: 28px auto 0;
+      max-width: 860px;
+      background: var(--bg-card);
+      border: 1px solid rgba(0, 161, 224, 0.35);
+      border-radius: var(--radius);
+      padding: 22px 26px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      text-align: left;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-author-showcase::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--primary), var(--accent));
+    }
+    .has-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+    .has-content {
+      flex: 1;
+    }
+    .has-tagline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+    .has-prefix {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .has-author-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .has-author-name:hover {
+      color: var(--primary);
+    }
+    .has-role-pill {
+      background: rgba(255, 140, 0, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(255, 140, 0, 0.35);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+    .has-bio {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+    .has-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .has-btn {
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 16px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .has-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+    .has-btn.primary {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 2px 10px var(--primary-glow);
+    }
+    .has-btn.primary:hover {
+      background: #008cc4;
+      color: white;
+    }
+
+    /* Footer Author Card */
+    .footer-author-box {
+      max-width: 680px;
+      margin: 0 auto 30px;
+      padding-bottom: 26px;
+      border-bottom: 1px solid var(--border);
+    }
+    .footer-author-box h4 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .footer-author-box h4 span {
+      color: var(--primary);
+    }
+    .footer-author-box p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0 auto 16px;
+      max-width: 600px;
+    }
+    .footer-author-socials {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+      .split-comparison { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .search-box { width: 140px; }
+      .hero { padding: 40px 16px; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .hero-author-showcase { flex-direction: column; text-align: center; }
+      .has-tagline { justify-content: center; }
+      .has-links { justify-content: center; }
+      .nav-author-role { display: none; }
+      .nav-portfolio-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div id="progress-bar"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="nav-inner">
+      <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+        <a href="#" class="brand">
+          <span>Integration<span style="color:var(--accent);">Mind</span></span>
+          <span class="brand-badge">2026 Edition</span>
+        </a>
+        <div class="nav-author-chip" title="Lead Architect & Author">
+          <span class="nav-author-dot"></span>
+          <span class="nav-author-text">Authored by <a href="https://niranjanprofile.vercel.app" target="_blank" class="nav-author-name">Niranjan Potter</a></span>
+          <span class="nav-author-role">· MuleSoft Architect</span>
+        </div>
+      </div>
+
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search 120+ interview questions, DataWeave, traps..." onkeyup="filterContent()" />
+      </div>
+
+      <div class="nav-actions">
+        <a href="https://niranjanprofile.vercel.app" target="_blank" class="pill-btn nav-portfolio-btn" style="background: rgba(0, 161, 224, 0.12); color: var(--primary); border: 1px solid rgba(0, 161, 224, 0.4);">Portfolio ↗</a>
+        <button class="btn-toggle" onclick="toggleTheme()" id="themeBtn">🌓 Light</button>
+        <a href="https://www.linkedin.com/in/niranjan-potter-551b49171" target="_blank" class="pill-btn" style="background:var(--sf-blue); color:white; border:none;">LinkedIn ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">⚡ Enterprise MuleSoft Interview & Architecture Masterclass</div>
+    <h1>The Complete <span class="gradient">MuleSoft Developer & Lead</span> Interview Guide</h1>
+    <p class="lead">Enterprise integration blueprints, modern API-led architecture, DataWeave 2.0 laboratory, CloudHub 2.0 deployment, and 2026 AI Agentforce integrations.</p>
+
+    <!-- Author Showcase Card -->
+    <div class="hero-author-showcase">
+      <div class="has-avatar">
+        <div class="avatar-initials">NP</div>
+      </div>
+      <div class="has-content">
+        <div class="has-tagline">
+          <span class="has-prefix">Curated, Developed & Authored by</span>
+          <a href="https://niranjanprofile.vercel.app" target="_blank" class="has-author-name">Niranjan Potter</a>
+          <span class="has-role-pill">Senior MuleSoft Developer & Lead Architect</span>
+        </div>
+        <p class="has-bio">
+          Enterprise Integration Architect orchestrating 5M+ monthly transactions at 99.9% SLA · Salesforce Certified MuleSoft Platform Architect & Developer · Double Star Ranger on Trailhead · Enterprise specialist in CloudHub 2.0 modernization, DataWeave 2.0 performance, & Agentic AI (MCP)
+        </p>
+        <div class="has-links">
+          <a href="https://niranjanprofile.vercel.app" target="_blank" class="has-btn primary">🌐 Portfolio</a>
+          <a href="https://www.linkedin.com/in/niranjan-potter-551b49171" target="_blank" class="has-btn">💼 LinkedIn Profile</a>
+          <a href="https://github.com/niranjanpotter" target="_blank" class="has-btn">🐙 GitHub</a>
+          <a href="mailto:niranjanpotter1997@gmail.com" class="has-btn">✉️ Contact Author</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin: 24px 0 16px;">
+      <span style="color: var(--text-muted); font-size: 0.95rem;">Curated Enterprise Reference Architecture · DataWeave 2.0 Lab · CloudHub 2.0 · Real Scenarios & Traps</span>
+    </div>
+
+    <!-- Stats -->
+    <div class="hero-stats">
+      <div class="stat-pill">
+        <div class="stat-num">5M+</div>
+        <div class="stat-desc">Monthly API Transactions</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-num">44+</div>
+        <div class="stat-desc">Production APIs Architected</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-num">95%</div>
+        <div class="stat-desc">MUnit Quality Gate</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-num">99.9%</div>
+        <div class="stat-desc">Uptime SLA Guaranteed</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-num">Top 20</div>
+        <div class="stat-desc">Candidate Traps Exposed</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Filter Bar -->
+  <nav class="filter-bar">
+    <div class="filter-list">
+      <a href="#interview-strategy" class="pill-btn active">🎯 Strategy & Metrics</a>
+      <a href="#core-flows" class="pill-btn">🔀 Core Flow Controls</a>
+      <a href="#messaging-persistence" class="pill-btn">📨 MQ & ObjectStore</a>
+      <a href="#error-handling" class="pill-btn">⚠️ Error Handling Deep Dive</a>
+      <a href="#dataweave-lab" class="pill-btn">📝 DataWeave 2.0 Lab</a>
+      <a href="#cloudhub-rtf" class="pill-btn">☁️ CloudHub 2.0 & RTF</a>
+      <a href="#ai-agentforce" class="pill-btn">🤖 2026 AI & Agentforce</a>
+      <a href="#real-scenarios" class="pill-btn">🏢 Real Scenarios</a>
+      <a href="#whiteboard-guide" class="pill-btn">📐 Live Whiteboard</a>
+      <a href="#top-traps" class="pill-btn">🚨 Top 20 Traps</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- MODULE 1: ENTERPRISE STRATEGY & ARCHITECTURE METRICS -->
+    <section class="section-module" id="interview-strategy">
+      <div class="module-header">
+        <div class="module-title-wrap">
+          <div class="module-icon">🎯</div>
+          <div>
+            <h2 class="module-title">Chapter A · Enterprise Interview Strategy & Production Metrics</h2>
+            <div class="module-subtitle">Frameworks, high-impact vocabulary, and real enterprise scale metrics for senior technical interviews.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="qa-card search-item">
+          <span class="qa-badge star">STAR FRAMEWORK</span>
+          <h3>The STAR Method for Enterprise Architecture</h3>
+          <p>When interviewers ask scenario and project questions, follow the STAR structure to demonstrate technical leadership:</p>
+          <div class="script-box">
+            <div class="script-box-title">📋 Production STAR Blueprint</div>
+            <p class="script-quote">
+              <strong>S (Situation):</strong> In a mission-critical utility customer integration handling 5M+ monthly calls, the legacy billing inquiry took 2.5s during peak hours.<br><br>
+              <strong>T (Task):</strong> Modernize the pipeline to cut latency below 1.2s while guaranteeing zero data loss across SAP and DynamoDB.<br><br>
+              <strong>A (Action):</strong> Deployed API-led connectivity using Scatter-Gather to parallelize SAP SAPI (OData) and DynamoDB SAPI (SigV4) calls, combined with ObjectStore v2 idempotency.<br><br>
+              <strong>R (Result):</strong> Slashed response latency from 2.5s to 1.1s (55% gain), eliminated duplicate writes, and maintained 99.9% uptime over 18 months.
+            </p>
+          </div>
+          <div class="cross-q">
+            <div class="cross-q-title">💡 Senior Delivery Technique</div>
+            <div class="cross-q-text">Always lead with concrete business metrics (latency reduction, uptime SLA, transactions/mo) rather than just listing technologies. Interviewers test your architectural thinking and business impact.</div>
+          </div>
+        </div>
+
+        <div class="qa-card search-item">
+          <span class="qa-badge trap">POWER VOCABULARY</span>
+          <h3>Killer Phrases vs. Career-Ending Red Flags</h3>
+          <div class="split-comparison">
+            <div class="compare-side do">
+              <div class="compare-header">✅ Killer Phrases to Use</div>
+              <ul>
+                <li>"API-led 3-layer connectivity"</li>
+                <li>"5M+ monthly production calls"</li>
+                <li>"95% MUnit quality gate on PRs"</li>
+                <li>"CorrelationId end-to-end tracing"</li>
+                <li>"MANUAL ack + ObjectStore idempotency"</li>
+                <li>"Zero-downtime rolling deployments"</li>
+              </ul>
+            </div>
+            <div class="compare-side dont">
+              <div class="compare-header">❌ Never Say These</div>
+              <ul>
+                <li>"I just follow what my team lead says"</li>
+                <li>"I'm not sure but I think..."</li>
+                <li>"I haven't used that connector yet"</li>
+                <li>"It was just basic CRUD APIs"</li>
+                <li>"I only worked on a very small part"</li>
+                <li>"We don't write MUnits for everything"</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Metric</th><th>Value</th><th>Enterprise Context</th></tr></thead>
+              <tbody>
+                <tr><td><strong>APIs Architected</strong></td><td>44+ Production</td><td>XAPIs, PAPIs, SAPIs across enterprise domains</td></tr>
+                <tr><td><strong>Daily Transactions</strong></td><td>70,000+</td><td>Billing, Account, Payment, Outages</td></tr>
+                <tr><td><strong>MUnit Gates</strong></td><td>95%</td><td>All externals mocked, SonarQube quality gates</td></tr>
+                <tr><td><strong>Environments</strong></td><td>7 Tiers</td><td>Sandbox → Test → QA → SIT → TLB → UAT → Prod</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE 2: CORE FLOWS & ROUTERS -->
+    <section class="section-module" id="core-flows">
+      <div class="module-header">
+        <div class="module-title-wrap">
+          <div class="module-icon">🔀</div>
+          <div>
+            <h2 class="module-title">Chapter B · Flow Controls: Scatter-Gather, ForEach & Batch Processing</h2>
+            <div class="module-subtitle">The backbone of MuleSoft orchestration. Execution models, thread handling, and error containment.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Scatter-Gather -->
+        <div class="qa-card search-item">
+          <span class="qa-badge star">SCATTER-GATHER</span>
+          <h3>Scatter-Gather Mechanics & Composite Routing</h3>
+          <p>Executes multiple routes simultaneously in parallel using separate threads. The input payload to all routes is identical. Results are aggregated into an array of route results: <code>payload[0].payload</code> for route 1, <code>payload[1].payload</code> for route 2.</p>
+          
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">DataWeave 2.0</span>
+              <button class="btn-copy" onclick="copyCode(this)">Copy</button>
+            </div>
+            <div class="code-content"><pre>%dw 2.0
+output application/json
+do {
+  var sap = payload[0].payload
+  var dynamo = payload[1].payload
+  ---
+  {
+    accountId: sap.AccountID,
+    billingAmount: sap.TotalDue as Number,
+    preferences: dynamo.preferences default {}
+  }
+}</pre></div>
+          </div>
+
+          <div class="cross-q">
+            <div class="cross-q-title">🚨 The #1 Interview Trap on Scatter-Gather</div>
+            <div class="cross-q-text">
+              <strong>Question:</strong> "If 1 out of 3 routes fails, what happens?"<br>
+              <strong>Trap Answer:</strong> "It skips the failed route and returns the remaining two." (WRONG!)<br>
+              <strong>Senior Answer:</strong> By default, if ANY route fails, the entire component throws <code>MULE:COMPOSITE_ROUTING</code> and all results are discarded. To allow partial success, wrap each route in a <code>&lt;try&gt;</code> scope with <code>&lt;on-error-continue&gt;</code>!
+            </div>
+          </div>
+        </div>
+
+        <!-- ForEach vs Parallel ForEach vs Batch -->
+        <div class="qa-card search-item">
+          <span class="qa-badge">LOOPING COMPARISON</span>
+          <h3>ForEach vs. Parallel ForEach vs. Batch Job</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Aspect</th><th>ForEach</th><th>Parallel ForEach</th><th>Batch Job</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Execution</strong></td><td>Sequential (1 thread)</td><td>Parallel (Thread pool)</td><td>Chunked Parallel (Batch Steps)</td></tr>
+                <tr><td><strong>Payload After</strong></td><td><strong style="color:var(--accent);">UNCHANGED</strong> (original)</td><td>Aggregated results array</td><td><code>BatchJobResult</code> in On Complete</td></tr>
+                <tr><td><strong>Failure</strong></td><td>Halts on first error</td><td>Throws <code>MULE:COMPOSITE_ROUTING</code></td><td>Continues (tracks failure counts)</td></tr>
+                <tr><td><strong>Crash Recovery</strong></td><td>Restarts from 0</td><td>Restarts from 0</td><td><strong>Yes</strong> (Persistent ObjectStore)</td></tr>
+                <tr><td><strong>Best For</strong></td><td>Dependent sequences</td><td>Independent &lt;1,000 items</td><td>Enterprise ETL (100K+ records)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="cross-q">
+            <div class="cross-q-title">💡 Critical Variable Scope Difference</div>
+            <div class="cross-q-text">
+              Variables set inside <strong>ForEach</strong> ARE visible after the loop (use <code>vars.results = vars.results ++ [payload]</code> to accumulate). But variables set inside <strong>Scatter-Gather</strong> or <strong>Async Scope</strong> are isolated and NOT visible outside!
+            </div>
+          </div>
+        </div>
+
+        <!-- Batch Job Phases -->
+        <div class="qa-card search-item">
+          <span class="qa-badge new">BATCH PROCESSING</span>
+          <h3>Batch Job 3 Phases & maxFailedRecords Trap</h3>
+          <p><strong>1. Load & Dispatch:</strong> Splits the input dataset into individual records in a separate thread pool.<br>
+          <strong>2. Process (Batch Steps):</strong> Records flow through sequential steps. Each step can accept expressions (e.g. <code>#[payload.status == 'PENDING']</code>). Use <em>Batch Aggregator</em> (size=5,000) for bulk database/Salesforce operations.<br>
+          <strong>3. On Complete:</strong> Summarizes total, successful, and failed records via <code>batchJobResult</code>.</p>
+          
+          <div class="cross-q">
+            <div class="cross-q-title">🚨 The maxFailedRecords Trap</div>
+            <div class="cross-q-text">
+              The default value of <code>maxFailedRecords</code> is <strong>0</strong> (NOT -1!). A single bad record stops the entire batch immediately. Set <code>maxFailedRecords="-1"</code> to never stop, or a threshold like <code>1000</code> for enterprise ETL tolerance.
+            </div>
+          </div>
+        </div>
+
+        <!-- Until Successful -->
+        <div class="qa-card search-item">
+          <span class="qa-badge star">RESILIENCE</span>
+          <h3>Until Successful Retry Math & Backoff</h3>
+          <p>Retries transient errors (5xx, HTTP timeouts, network blips). Never retry 400 Bad Request client errors.</p>
+          
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">XML Configuration</span>
+              <button class="btn-copy" onclick="copyCode(this)">Copy</button>
+            </div>
+            <div class="code-content"><pre>&lt;until-successful maxRetries="3" millisBetweenRetries="5000"&gt;
+    &lt;http:request config-ref="SAP_Config" path="/billing" /&gt;
+&lt;/until-successful&gt;</pre></div>
+          </div>
+
+          <div class="cross-q">
+            <div class="cross-q-title">🚨 The Retry Math Trap</div>
+            <div class="cross-q-text">
+              If <code>maxRetries="3"</code>, how many attempts happen? Exactly <strong>4 attempts</strong> (1 initial attempt + 3 retries). Exhaustion throws <code>MULE:RETRY_EXHAUSTED</code>. Note: Until Successful has fixed delays; connector reconnection strategies have exponential backoff.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE 3: MESSAGING & OBJECTSTORE -->
+    <section class="section-module" id="messaging-persistence">
+      <div class="module-header">
+        <div class="module-title-wrap">
+          <div class="module-icon">📨</div>
+          <div>
+            <h2 class="module-title">Chapter C · Enterprise Messaging & Persistence: Anypoint MQ, SQS & ObjectStore</h2>
+            <div class="module-subtitle">Guaranteed delivery, manual acknowledgments, dead letter queues, and multi-worker idempotency.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="qa-card search-item">
+          <span class="qa-badge star">ANYPOINT MQ</span>
+          <h3>MANUAL Acknowledgment & The Idempotency Blueprint</h3>
+          <p>Never use <code>AUTO</code> ack for critical transactions! In AUTO mode, the message is removed on receipt — if the Mule worker crashes mid-flow, the message is permanently lost.</p>
+          
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">Enterprise Idempotency Pattern</span>
+              <button class="btn-copy" onclick="copyCode(this)">Copy</button>
+            </div>
+            <div class="code-content"><pre>// 1. Extract transactionId from inbound event
+// 2. Query persistent ObjectStore v2
+os:contains(key=vars.transactionId, objectStore="IdempotencyStore")
+
+// 3. IF EXISTS -> Log duplicate, call anypoint-mq:ack, exit safely.
+// 4. IF NOT EXISTS -> Process business logic (SAP/DynamoDB).
+//    On Success -> os:store(key, TTL=24h) -> anypoint-mq:ack
+//    On Error   -> anypoint-mq:nack (returns to queue for retry)</pre></div>
+          </div>
+
+          <div class="cross-q">
+            <div class="cross-q-title">💡 Why Anypoint Object Store v2 (OS v2)?</div>
+            <div class="cross-q-text">In CloudHub with 2+ workers, in-memory ObjectStore is isolated per worker. Worker 1 cannot see keys from Worker 2! You MUST enable <code>persistent="true"</code> (OS v2) for cluster-wide deduplication.</div>
+          </div>
+        </div>
+
+        <div class="qa-card search-item">
+          <span class="qa-badge">MESSAGING MATRIX</span>
+          <h3>Broker Comparison: Anypoint MQ vs. SQS vs. Kafka vs. VM</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Broker</th><th>Scope</th><th>Throughput</th><th>Replay</th><th>Use Case</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Anypoint MQ</strong></td><td>CloudHub native</td><td>Enterprise</td><td>DLQ only</td><td>Mule-to-Mule async, native MANUAL ack</td></tr>
+                <tr><td><strong>Amazon SQS</strong></td><td>AWS Ecosystem</td><td>Very High</td><td>Limited</td><td>AWS Lambda trigger, pure AWS stacks</td></tr>
+                <tr><td><strong>Apache Kafka</strong></td><td>Enterprise-wide</td><td>Millions/sec</td><td><strong>Yes</strong> (offsets)</td><td>Event streaming, IoT, CDC event bus</td></tr>
+                <tr><td><strong>VM Connector</strong></td><td>Single Mule App</td><td>Memory speed</td><td>No</td><td>Flow-to-flow async (NOT durable in CH2)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="cross-q">
+            <div class="cross-q-title">🚨 CloudHub 2.0 VM Connector Alert</div>
+            <div class="cross-q-text">In CloudHub 2.0 and Runtime Fabric (RTF), persistent VM queues do NOT exist! Transient queues lose messages during pod restarts. Always use Anypoint MQ for durable messaging in containerized environments.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE 4: ERROR HANDLING -->
+    <section class="section-module" id="error-handling">
+      <div class="module-header">
+        <div class="module-title-wrap">
+          <div class="module-icon">⚠️</div>
+          <div>
+            <h2 class="module-title">Chapter D · Error Handling Deep Dive: Continue vs. Propagate</h2>
+            <div class="module-subtitle">How to structure enterprise error boundaries across 3 layers so frontend consumers never receive raw stack traces.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="qa-card search-item">
+          <span class="qa-badge star">ERROR SCOPES</span>
+          <h3>On-Error Continue vs. On-Error Propagate</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Aspect</th><th>On-Error Continue</th><th>On-Error Propagate</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Flow Execution</strong></td><td>Swallows error, finishes flow successfully</td><td>Halts flow, re-throws error to caller</td></tr>
+                <tr><td><strong>HTTP Status</strong></td><td><strong>200 OK</strong> (unless vars.httpStatus set)</td><td><strong>500 / Error status</strong> returned</td></tr>
+                <tr><td><strong>Payload Returned</strong></td><td>Whatever is constructed inside handler</td><td>Error payload generated in handler</td></tr>
+                <tr><td><strong>When to Use</strong></td><td>Expected business fallbacks (e.g. record not found)</td><td>Unexpected failures (DB down, auth failed)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="qa-card search-item">
+          <span class="qa-badge">ENTERPRISE STANDARD</span>
+          <h3>Enterprise Standardized Error Response Schema</h3>
+          <p>Every API in every layer (SAPI, PAPI, XAPI) returns the exact same JSON format:</p>
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">DataWeave 2.0 Error Envelope</span>
+              <button class="btn-copy" onclick="copyCode(this)">Copy</button>
+            </div>
+            <div class="code-content"><pre>%dw 2.0
+output application/json
+---
+{
+  correlationId: vars.correlationId default correlationId,
+  timestamp: (now() >> "America/New_York") as String {format: "yyyy-MM-dd HH:mm:ss"},
+  status: vars.httpStatus default 500,
+  errorCode: error.errorType.identifier default "INTERNAL_ERROR",
+  message: error.description,
+  apiName: p('app.name'),
+  apiVersion: "v2.0.0"
+}</pre></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE 5: DATAWEAVE 2.0 LAB -->
+    <section class="section-module" id="dataweave-lab">
+      <div class="module-header">
+        <div class="module-title-wrap">
+          <div class="module-icon">📝</div>
+          <div>
+            <h2 class="module-title">Chapter E · DataWeave 2.0 Laboratory: Functions, Masking & Null-Safety</h2>
+            <div class="module-subtitle">The top coding questions asked in technical rounds. Declarative transformations and performance tips.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <!-- Snippet 1 -->
+        <div class="qa-card search-item">
+          <span class="qa-badge star">MASKING PII</span>
+          <h3>Credit Card & SSN Masking</h3>
+          <p>Mask all but the last 4 digits using regex replacement or string slicing:</p>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">DataWeave 2.0</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div>
+            <div class="code-content"><pre>%dw 2.0
+output application/json
+---
+payload.cardNum replace /\d(?=\d{4})/ with "*"
+// "1234567890123456" -> "************3456"
+
+// Or using dw::util::Values
+import * from dw::util::Values
+---
+payload mask "ssn" with "***-**-****"</pre></div>
+          </div>
+        </div>
+
+        <!-- Snippet 2 -->
+        <div class="qa-card search-item">
+          <span class="qa-badge">AGGREGATION</span>
+          <h3>reduce() for Sum, Concat & Max</h3>
+          <p>Accumulate array elements with a seed accumulator:</p>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">DataWeave 2.0</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div>
+            <div class="code-content"><pre>%dw 2.0
+output application/json
+var nums = [10, 25, 40, 5]
+---
+{
+  total: nums reduce ((item, acc = 0) -> acc + item),
+  highest: nums reduce ((item, acc = 0) -> 
+    if (item > acc) item else acc)
+}</pre></div>
+          </div>
+        </div>
+
+        <!-- Snippet 3 -->
+        <div class="qa-card search-item">
+          <span class="qa-badge">SAFE NAVIGATION</span>
+          <h3>Null Safety with ?. and default</h3>
+          <p>Prevent NullPointerExceptions on nested optional XML/JSON nodes:</p>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">DataWeave 2.0</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div>
+            <div class="code-content"><pre>%dw 2.0
+output application/json
+---
+{
+  city: payload.customer.address?.city default "UNKNOWN",
+  meters: payload.installations.results default [] 
+    map (m) -> {
+      id: m.meterId default "",
+      status: m.status default "INACTIVE"
+    }
+}</pre></div>
+          </div>
+        </div>
+
+        <!-- Snippet 4 -->
+        <div class="qa-card search-item">
+          <span class="qa-badge">ARRAYS</span>
+          <h3>flatten vs. flatMap</h3>
+          <p><code>flatten</code> turns a 2D array 1D. <code>flatMap</code> maps then flattens in one operation:</p>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">DataWeave 2.0</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div>
+            <div class="code-content"><pre>%dw 2.0
+output application/json
+---
+// flatten([[1,2], [3,4]]) -> [1,2,3,4]
+payload.orders flatMap (ord) -> ord.lineItems</pre></div>
+          </div>
+        </div>
+
+        <!-- Snippet 5 -->
+        <div class="qa-card search-item">
+          <span class="qa-badge">DYNAMIC FLOW CALL</span>
+          <h3>lookup() & p() Functions</h3>
+          <p><code>p('secure::api.key')</code> reads encrypted YAML properties. <code>lookup('flowName', payload)</code> invokes a Mule flow directly.</p>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">DataWeave 2.0</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div>
+            <div class="code-content"><pre>%dw 2.0
+output application/json
+---
+{
+  apiKey: p('secure::sap.password'),
+  enrichment: lookup('validateAccountFlow', {id: payload.acctId})
+}</pre></div>
+          </div>
+        </div>
+
+        <!-- Snippet 6 -->
+        <div class="qa-card search-item">
+          <span class="qa-badge">UTILITY</span>
+          <h3>zip(), pluck() & mapObject()</h3>
+          <p>Key transformations for combining headers and records:</p>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">DataWeave 2.0</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div>
+            <div class="code-content"><pre>%dw 2.0
+output application/json
+// zip combines pairs: [1,2] zip ['a','b'] -> [[1,'a'], [2,'b']]
+// pluck turns object keys/values into array:
+payload pluck ((val, key) -> { property: key, val: val })</pre></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE 6: CLOUDHUB 2.0 & DEVOPS -->
+    <section class="section-module" id="cloudhub-rtf">
+      <div class="module-header">
+        <div class="module-title-wrap">
+          <div class="module-icon">☁️</div>
+          <div>
+            <h2 class="module-title">Chapter F · CloudHub 1.0 vs. 2.0, Runtime Fabric (RTF) & CI/CD</h2>
+            <div class="module-subtitle">Containerized Private Spaces, mTLS handshake debugging, and Maven deployment automation.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="qa-card search-item">
+          <span class="qa-badge star">CH 1.0 VS 2.0</span>
+          <h3>CloudHub 1.0 vs. CloudHub 2.0 Architectural Shift</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Dimension</th><th>CloudHub 1.0</th><th>CloudHub 2.0</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Infrastructure</strong></td><td>AWS EC2 VMs (1 worker = 1 VM)</td><td><strong>Kubernetes Containers</strong> in Private Spaces</td></tr>
+                <tr><td><strong>Deployments</strong></td><td>Slow worker provisioning (4–6 min)</td><td><strong>Zero-downtime rolling updates</strong> (30s)</td></tr>
+                <tr><td><strong>Load Balancers</strong></td><td>Dedicated Load Balancers (DLB)</td><td><strong>Ingress Controller</strong> (native TLS & paths)</td></tr>
+                <tr><td><strong>Storage</strong></td><td>Ephemeral worker disk</td><td>Supports Ephemeral + Persistent Volumes</td></tr>
+                <tr><td><strong>Scaling</strong></td><td>Manual worker add</td><td><strong>Horizontal Pod Autoscaling (HPA)</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="qa-card search-item">
+          <span class="qa-badge">SECURITY & MTLS</span>
+          <h3>mTLS (Mutual TLS) Debugging Checklist</h3>
+          <p>Both client and server validate certificates. In HTTP Request, configure both <code>trustStore</code> (server's CA) and <code>keyStore</code> (client's private key + cert).</p>
+          <div class="script-box">
+            <div class="script-box-title">🛠️ Debugging Steps When Handshake Fails</div>
+            <p class="script-quote">
+              1. Inspect cert expiration: <code>openssl x509 -in cert.pem -text -noout</code><br>
+              2. Test connection with CLI: <code>openssl s_client -connect host:443 -cert client.pem -key key.pem</code><br>
+              3. Check TLS version: ensure both client and server enforce TLS 1.2+.<br>
+              4. Review CloudHub logs for: <em>"Received fatal alert: certificate_unknown"</em>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE 7: 2026 AI & AGENTFORCE -->
+    <section class="section-module" id="ai-agentforce">
+      <div class="module-header">
+        <div class="module-title-wrap">
+          <div class="module-icon">🤖</div>
+          <div>
+            <h2 class="module-title">Chapter G · 2026 Technology: Agentforce, Model Context Protocol (MCP) & Snowflake</h2>
+            <div class="module-subtitle">How MuleSoft transforms into the integration nervous system for AI agents and real-time enterprise LLMs.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="qa-card search-item">
+          <span class="qa-badge new">MCP CONNECTOR</span>
+          <h3>MuleSoft as an MCP (Model Context Protocol) Server</h3>
+          <p><strong>What is MCP?</strong> The open standard (by Anthropic) connecting LLMs to external tools. MuleSoft's MCP connector exposes any Mule flow as an MCP Tool.</p>
+          <div class="script-box">
+            <div class="script-box-title">🗣️ Senior Interview Definition</div>
+            <p class="script-quote">
+              "MCP is the <strong>USB-C of AI integrations</strong>. Instead of building custom REST connectors for Claude, ChatGPT, or Agentforce, MuleSoft exposes enterprise SAP and Billing APIs as standardized MCP tools. The AI agent inspects the tool catalog, passes structured JSON parameters, and Mule executes the transaction securely through our governance layer."
+            </p>
+          </div>
+        </div>
+
+        <div class="qa-card search-item">
+          <span class="qa-badge star">AGENTFORCE ACTIONS</span>
+          <h3>Einstein AI Connector vs. Inference Connector</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Feature</th><th>Einstein AI Connector</th><th>Inference Connector</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Trust Layer</strong></td><td><strong>Yes</strong> (PII masked, zero retention)</td><td>No (uses model provider terms)</td></tr>
+                <tr><td><strong>Orgs Required</strong></td><td>Salesforce Org required</td><td>Standalone (no SF org needed)</td></tr>
+                <tr><td><strong>LLM Support</strong></td><td>Salesforce-approved models</td><td>33+ Providers (OpenAI, Gemini, Anthropic)</td></tr>
+                <tr><td><strong>Best For</strong></td><td>Healthcare, Banking, Agentforce</td><td>Multi-cloud routing via Model Proxy</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE 8: REAL SCENARIOS -->
+    <section class="section-module" id="real-scenarios">
+      <div class="module-header">
+        <div class="module-title-wrap">
+          <div class="module-icon">🏢</div>
+          <div>
+            <h2 class="module-title">Chapter H · 14 Real Production Scenarios & "What If?" Drill-Downs</h2>
+            <div class="module-subtitle">Click each scenario to review the situation, layer-by-layer call trace, and senior interviewer responses.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accordion 1 -->
+      <details class="qa-accordion search-item">
+        <summary class="qa-summary">
+          <span>S1: Backend ERP returns HTTP 500 in PAPI call chain. Walk me through what happens at each layer.</span>
+          <span class="summary-icon">▶</span>
+        </summary>
+        <div class="qa-body">
+          <p><strong>Layer-by-Layer Propagation:</strong></p>
+          <ol style="padding-left: 20px; line-height: 1.8;">
+            <li><strong>ERP SAPI:</strong> Receives 500 from ERP → error handler catches <code>HTTP:CONNECTIVITY</code> → constructs error payload <code>{correlationId, errorCode: "ERP_ERROR", message: "Upstream ERP 500", layer: "SAPI"}</code> → <code>on-error-propagate</code> re-throws.</li>
+            <li><strong>Core Process PAPI:</strong> Catches error from SAPI → enriches with <code>layer: "PAPI"</code> and business context → <code>on-error-propagate</code> re-throws.</li>
+            <li><strong>Consumer XAPI:</strong> Global error handler catches error → sets <code>vars.httpStatus = 503 Service Unavailable</code> → maps to consumer-friendly format → returns HTTP 503 to consumer application.</li>
+          </ol>
+          <div class="cross-q">
+            <div class="cross-q-title">💡 Cross-Question: "Would you return 200 or 503 to frontend callers?"</div>
+            <div class="cross-q-text">Always return <strong>503</strong>! Never swallow upstream outages with 200 OK and an error message, as client SDKs and UI state machines rely on HTTP status codes to display retries.</div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Accordion 2 -->
+      <details class="qa-accordion search-item">
+        <summary class="qa-summary">
+          <span>S2: CloudHub with 2 workers. Worker 1 crashes mid-processing an MQ message. What happens?</span>
+          <span class="summary-icon">▶</span>
+        </summary>
+        <div class="qa-body">
+          <p>Because we use <strong>MANUAL acknowledgment mode</strong>, the message was never ACKed. After Anypoint MQ's visibility timeout expires, Worker 2 picks up the message automatically. Worker 2 checks the persistent ObjectStore v2 for the <code>transactionId</code>. If Worker 1 partially wrote before crashing, the idempotency check detects it, ACKs the message, and avoids duplicate writes.</p>
+        </div>
+      </details>
+
+      <!-- Accordion 3 -->
+      <details class="qa-accordion search-item">
+        <summary class="qa-summary">
+          <span>S3: Nightly batch processes 50,000 records. After 30,000, runtime restarts. How to continue from 30,001?</span>
+          <span class="summary-icon">▶</span>
+        </summary>
+        <div class="qa-body">
+          <p>Implement <strong>Watermarking with persistent ObjectStore v2</strong>. At the end of each batch chunk, store the latest record's <code>updatedAt</code> timestamp. On restart, the Load & Dispatch phase queries: <code>SELECT * FROM accounts WHERE updatedAt > :lastWatermark</code>, continuing seamlessly from record 30,001.</p>
+        </div>
+      </details>
+
+      <!-- Accordion 4 -->
+      <details class="qa-accordion search-item">
+        <summary class="qa-summary">
+          <span>S4: Core API traffic spikes 10x during peak hours. Response time slows from 1s to 8s. Diagnosis & fix?</span>
+          <span class="summary-icon">▶</span>
+        </summary>
+        <div class="qa-body">
+          <p><strong>Diagnosis First:</strong> Check Anypoint Monitoring. If CPU/Heap is at 95% → Vertical scaling (increase vCore). If request queues are backing up while CPU is low → Horizontal scaling (add worker replicas). If downstream ERP latency rose to 7s → add ObjectStore caching (TTL=5min) on summaries, reducing backend load by 40% immediately.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- MODULE 9: LIVE WHITEBOARD -->
+    <section class="section-module" id="whiteboard-guide">
+      <div class="module-header">
+        <div class="module-title-wrap">
+          <div class="module-icon">📐</div>
+          <div>
+            <h2 class="module-title">Chapter I · Live Whiteboard Architecture & Flow Diagram</h2>
+            <div class="module-subtitle">Memorize this exact 3-tier diagram to draw on virtual or physical whiteboards during system design rounds.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qa-card search-item">
+        <div class="arch-diagram">
++---------------------------------------------------------------------------------------------------+
+|                                      CHANNELS / CONSUMERS                                         |
+|                      [ Web Application / Portal ]           [ Mobile App / External Client ]      |
++-------------------------------------------------+-------------------------------------------------+
+                                                  |
+                                                  | HTTPS / OAuth 2.0 + Client ID Enforcement
+                                                  v
++---------------------------------------------------------------------------------------------------+
+|                                  EXPERIENCE LAYER (XAPI)                                          |
+|                customer-web-xapi                             customer-mobile-xapi                 |
+|            - Channel-specific data formatting            - Mobile payload compression             |
+|            - Client ID validation                        - Strict Rate Limiting (500 req/min)     |
++-------------------------------------------------+-------------------------------------------------+
+                                                  |
+                                                  | Internal HTTP + Correlation-Id
+                                                  v
++---------------------------------------------------------------------------------------------------+
+|                                    PROCESS LAYER (PAPI)                                           |
+|                                       orders-papi                                                 |
+|                    - Orchestrates business logic & transforms DataWeave                           |
+|                    - Scatter-Gather executes ERP-SAPI & Database-SAPI in PARALLEL                 |
+|                    - Cuts total response latency from 2.5s down to 1.1s (55% Gain)                |
++---------------------------------------+-----------------------------------+-----------------------+
+                                        |                                   |
+                      OData / REST SAPI |                                   | REST / SigV4 SAPI
+                                        v                                   v
++------------------------------------------------+ +------------------------------------------------+
+|               SYSTEM API (SAPI)                | |               SYSTEM API (SAPI)                |
+|                    erp-sapi                    | |                  db-prefs-sapi                 |
+|    - Handles enterprise ERP connection pool    | |    - Manages database security & credentials   |
+|    - Normalized JSON to backend schema mapping | |    - High-speed customer preference lookup     |
++-----------------------+------------------------+ +------------------------+-----------------------+
+                        |                                                   |
+                        v                                                   v
+            [ Core ERP Backend ]                                 [ Cloud Database / NoSQL ]
+        </div>
+
+        <div class="script-box">
+          <div class="script-box-title">🗣️ Verbal Walkthrough Script</div>
+          <p class="script-quote">
+            "I design all integrations following the MuleSoft API-led connectivity methodology. Top layer: Experience APIs tailor responses for specific clients like web and mobile channels. Middle layer: Process APIs orchestrate business logic — in this order flow, we use Scatter-Gather to call our ERP and database simultaneously, reducing latency by 55%. Bottom layer: System APIs insulate backends so that if the backend changes its data contract, only the System SAPI is modified while Process and Experience layers remain 100% untouched."
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE 10: TOP 20 INTERVIEW TRAPS -->
+    <section class="section-module" id="top-traps">
+      <div class="module-header">
+        <div class="module-title-wrap">
+          <div class="module-icon">🚨</div>
+          <div>
+            <h2 class="module-title">Chapter J · Top 20 Interview Traps & Exact Corrections</h2>
+            <div class="module-subtitle">The subtle traps that cause 80% of candidates to fail. Master the exact senior corrections.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 70px;">Trap #</th>
+              <th>The Topic</th>
+              <th style="color:var(--red);">What Most Candidates Say (Wrong)</th>
+              <th style="color:var(--green);">What You Should Say (Senior Answer)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="search-item">
+              <td><strong>T1</strong></td>
+              <td><strong>Mule 3 vs 4</strong></td>
+              <td>"Mule 4 is just a newer version."</td>
+              <td>"Mule 4 replaced the ESB model with a non-blocking reactive thread pool (Project Reactor), eliminated MEL for pure DataWeave 2.0, and standardized error handling."</td>
+            </tr>
+            <tr class="search-item">
+              <td><strong>T2</strong></td>
+              <td><strong>Sub-flow Error Handling</strong></td>
+              <td>"Sub-flows handle their own errors."</td>
+              <td>"Sub-flows have NO independent error handler. They inherit the caller flow's error handler. Only parent flows or Try scopes have dedicated handlers."</td>
+            </tr>
+            <tr class="search-item">
+              <td><strong>T3</strong></td>
+              <td><strong>HTTP 401 vs. 403</strong></td>
+              <td>"Both mean the user cannot access the API."</td>
+              <td>"401 Unauthorized means authentication failed (server doesn't know who you are). 403 Forbidden means authenticated successfully, but role lacks permission."</td>
+            </tr>
+            <tr class="search-item">
+              <td><strong>T4</strong></td>
+              <td><strong>Scatter-Gather Errors</strong></td>
+              <td>"It skips the failed route and returns the rest."</td>
+              <td>"If ANY route fails, the entire Scatter-Gather fails with <code>MULE:COMPOSITE_ROUTING</code>. You must wrap routes in Try scopes to allow partial success."</td>
+            </tr>
+            <tr class="search-item">
+              <td><strong>T5</strong></td>
+              <td><strong>Until Successful Retries</strong></td>
+              <td>"maxRetries=3 means 3 total calls."</td>
+              <td>"maxRetries counts attempts AFTER the initial call. maxRetries=3 means 1 initial + 3 retries = 4 total attempts."</td>
+            </tr>
+            <tr class="search-item">
+              <td><strong>T6</strong></td>
+              <td><strong>Batch maxFailedRecords</strong></td>
+              <td>"Default is -1 (unlimited)."</td>
+              <td>"Default is 0! A single bad record fails the entire batch immediately unless maxFailedRecords is explicitly configured."</td>
+            </tr>
+            <tr class="search-item">
+              <td><strong>T7</strong></td>
+              <td><strong>Set Variable Payload</strong></td>
+              <td>"Set Variable updates the payload."</td>
+              <td>"Set Variable modifies the <code>vars</code> map only. The message payload is completely untouched."</td>
+            </tr>
+            <tr class="search-item">
+              <td><strong>T8</strong></td>
+              <td><strong>DataWeave Default Output</strong></td>
+              <td>"DataWeave always defaults to JSON."</td>
+              <td>"Without an explicit directive, Mule infers the MIME type from the HTTP Accept header or defaults to <code>application/java</code> internally."</td>
+            </tr>
+            <tr class="search-item">
+              <td><strong>T9</strong></td>
+              <td><strong>API AutoDiscovery</strong></td>
+              <td>"API policies apply automatically."</td>
+              <td>"Policies only take effect if API AutoDiscovery (<code>api-gateway:autodiscovery</code>) is configured with the correct API ID matching API Manager."</td>
+            </tr>
+            <tr class="search-item">
+              <td><strong>T10</strong></td>
+              <td><strong>Secure Properties</strong></td>
+              <td>"Wrapping <code>![val]</code> encrypts it."</td>
+              <td>"<code>![val]</code> only references already encrypted ciphertext. You must first encrypt the string using Anypoint Secure Properties Tool."</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating Back to Top Button -->
+  <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to top">↑</button>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-author-box">
+      <h4>Architected & Developed by <span>Niranjan Potter</span></h4>
+      <p>Senior Integration Engineer & Technical Lead specializing in Mule ESB, CloudHub 2.0 modernization, DataWeave 2.0 performance optimization, and Agentic AI Architecture.</p>
+      <div class="footer-author-socials">
+        <a href="https://niranjanprofile.vercel.app" target="_blank" class="footer-link">🌐 Official Portfolio</a>
+        <a href="https://www.linkedin.com/in/niranjan-potter-551b49171" target="_blank" class="footer-link">💼 LinkedIn Profile</a>
+        <a href="https://github.com/niranjanpotter" target="_blank" class="footer-link">🐙 GitHub</a>
+        <a href="mailto:niranjanpotter1997@gmail.com" class="footer-link">✉️ niranjanpotter1997@gmail.com</a>
+      </div>
+    </div>
+
+    <h3 style="font-weight: 800; font-size: 1.4rem; margin-bottom: 8px;">Integration<span style="color:var(--accent);">Mind</span></h3>
+    <p style="color: var(--text-muted); font-size: 0.9rem;">Learn · Share · Integrate — The Ultimate MuleSoft & API-Led Integration Knowledge Base</p>
+    
+    <div class="footer-links">
+      <a href="#interview-strategy" class="footer-link">Strategy & Metrics</a>
+      <a href="#core-flows" class="footer-link">Flow Controls</a>
+      <a href="#messaging-persistence" class="footer-link">Messaging & MQ</a>
+      <a href="#error-handling" class="footer-link">Error Handling</a>
+      <a href="#dataweave-lab" class="footer-link">DataWeave 2.0 Lab</a>
+      <a href="#cloudhub-rtf" class="footer-link">CloudHub 2.0</a>
+      <a href="#ai-agentforce" class="footer-link">AI & Agentforce</a>
+      <a href="#real-scenarios" class="footer-link">Real Scenarios</a>
+      <a href="#top-traps" class="footer-link">Top 20 Traps</a>
+    </div>
+
+    <p style="color: var(--text-dim); font-size: 0.8rem; margin-top: 24px;">© 2026 IntegrationMind. Authored & Developed by Niranjan Potter. Built for the MuleSoft & Enterprise Integration Community.</p>
+  </footer>
+
+  <script>
+    // Scroll progress bar & Back-to-Top Button
+    window.onscroll = function() {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById("progress-bar").style.width = scrolled + "%";
+
+      const topBtn = document.getElementById("back-to-top");
+      if (winScroll > 300) {
+        topBtn.style.display = "flex";
+      } else {
+        topBtn.style.display = "none";
+      }
+    };
+
+    // Dark / Light Theme Toggle
+    function toggleTheme() {
+      const currentTheme = document.body.getAttribute('data-theme');
+      const themeBtn = document.getElementById('themeBtn');
+      if (currentTheme === 'light') {
+        document.body.removeAttribute('data-theme');
+        themeBtn.innerHTML = '🌓 Light';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.body.setAttribute('data-theme', 'light');
+        themeBtn.innerHTML = '🌙 Dark';
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    // Apply saved theme preference
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.setAttribute('data-theme', 'light');
+      const btn = document.getElementById('themeBtn');
+      if (btn) btn.innerHTML = '🌙 Dark';
+    }
+
+    // Copy Code Snippet
+    function copyCode(button) {
+      const codeBlock = button.closest('.code-block').querySelector('pre');
+      navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+        const orig = button.innerText;
+        button.innerText = 'Copied!';
+        button.style.background = 'var(--green)';
+        button.style.color = 'white';
+        setTimeout(() => {
+          button.innerText = orig;
+          button.style.background = '';
+          button.style.color = '';
+        }, 1800);
+      });
+    }
+
+    // Live Search Filter
+    function filterContent() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const items = document.querySelectorAll('.search-item, details.qa-accordion');
+
+      items.forEach(el => {
+        const text = el.innerText.toLowerCase();
+        if (text.includes(q)) {
+          el.style.display = '';
+          if (q.length > 2 && el.tagName === 'DETAILS') {
+            el.open = true;
+          }
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

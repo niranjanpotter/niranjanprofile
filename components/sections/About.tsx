@@ -42,7 +42,7 @@ function useLive() {
 const step = (p: number, a: number) => ({ opacity: seg(p, a, a + 0.08), transform: `translateY(${(1 - seg(p, a, a + 0.08)) * 30}px)` });
 
 const STORY =
-  'Senior MuleSoft Developer and Technical Lead orchestrating enterprise integration since 2021. Specializing in API-led connectivity, CloudHub 2.0 modernization, DataWeave 2.0 optimization, and robust multi-cloud architecture across energy, utilities, and global enterprises.';
+  'I design architectures once and scale them infinitely. Senior MuleSoft Developer & Technical Lead orchestrating mission-critical enterprise integrations — 5M+ monthly transactions at 99.9% uptime, CloudHub 2.0 modernization, and high-performance DataWeave 2.0 transformations. Double Star Ranger on Trailhead, Salesforce Certified MuleSoft Architect, cutting processing latency by 60% across multi-cloud ecosystems.';
 
 /** Ring dial for a stat — fills as you scroll. */
 function Dial({ value, suffix, label, k }: { value: number; suffix: string; label: string; k: number }) {
@@ -57,7 +57,7 @@ function Dial({ value, suffix, label, k }: { value: number; suffix: string; labe
         ))}
       </svg>
       <b>
-        {Math.round(value * k)}
+        {value % 1 === 0 ? Math.round(value * k) : (value * k).toFixed(1)}
         <i>{suffix}</i>
       </b>
       <span>{label}</span>
@@ -86,7 +86,7 @@ export default function About() {
             {words.map((w, i) => {
               const lit = seg(inkP * words.length, i - 1, i + 1);
               return (
-                <span key={i} style={{ opacity: 0.16 + lit * 0.84, color: lit > 0.9 && /CloudHub|DataWeave|API-led|enterprise|modernization|MuleSoft/.test(w) ? 'var(--red)' : undefined }}>
+                <span key={i} style={{ opacity: 0.16 + lit * 0.84, color: lit > 0.9 && /CloudHub|DataWeave|API-led|enterprise|modernization|MuleSoft|Architect|Ranger|transactions|uptime|infinitely/.test(w) ? 'var(--red)' : undefined }}>
                   {w}{' '}
                 </span>
               );
